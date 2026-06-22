@@ -1,47 +1,23 @@
-// model
-const model = {
-    getMessage() {
-        return "Hello, World!";
+import { renderButton, hideElement, showGreeting } from "./view.js";
+import { getMessage } from "./model.js";
+
+function initApp() {
+
+    const rootEl = document.getElementById('root');
+    if (!rootEl) {
+        console.error("Root element not found");
+        return;
     }
+
+    const buttonEl = renderButton();
+    rootEl.appendChild(buttonEl);
+
+    buttonEl.addEventListener("click", () => {
+        hideElement(buttonEl);
+        const greeting = getMessage();
+        const greetingEl = showGreeting(greeting);
+        rootEl.appendChild(greetingEl);
+    })
 }
 
-// view
-const view = {
-
-    renderButton() {
-        let button = document.querySelector("#button");
-        if (!button) {
-            button = document.createElement('button');
-            button.id = "button";
-            button.textContent = "Click me";
-            document.body.append(button);
-            return button;
-        }
-        return button
-    },
-
-    hideElement(element) {
-        element.style.display = "none";
-    },
-
-    showGreeting(message) {
-        const greetingElement = document.createElement('p');
-        greetingElement.textContent = message;
-        document.body.append(greetingElement);
-    },
-
-}
-
-// controller
-const controller = {
-    init() {
-        const button = view.renderButton();
-        button.addEventListener("click", () => {
-            const message = model.getMessage();
-            view.hideElement(button);
-            view.showGreeting(message);
-        })
-    },
-}
-
-controller.init();
+initApp();
