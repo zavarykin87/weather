@@ -1,3 +1,3 @@
-export function getMessage() {
-    return "Hello, World!";
+export function greeting() {
+    return "Welcome to the weather app!";
 }

@@ -14,7 +14,9 @@ export default {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin({
+    template: "src/index.html"
+  })],
   module: {
     rules: [
       {
